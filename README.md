@@ -13,6 +13,15 @@ Includes embedded
 ## Running
 ```mvn jetty:run```
 
+## Application notes
+This is a plain JEE7 Web Application. At startup it creates a
+websocket connection using a ServletContextListener. It passes the
+class WebSocketClient as ClientEndpoint. The ClientEndpoint handles
+all incoming events.
+
+- The start class ```src/main/java/com/atex/examples/WebSocketAPIConnector.java```
+- The event handler: ```src/main/java/com/atex/examples/WebSocketClient.java```
+
 ## WebSockets?
 Some startng points
 
