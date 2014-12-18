@@ -13,3 +13,9 @@ Includes embedded
 ## Running
 ```mvn jetty:run```
 
+## WebSockets?
+Some startng points
+
+- [javax.websocket](https://javaee-spec.java.net/javadocs/javax/websocket/package-summary.html)
+- [javax.websocket.ClientEndpoint](https://javaee-spec.java.net/javadocs/javax/websocket/ClientEndpoint.html)
+- [Small tutorial](http://java.dzone.com/articles/java-websockets-jsr-356-jetty) 
