@@ -1,5 +1,5 @@
 # Minimal Maven WAR scaffold
-Minimal Maven scaffold for trying out web applications. Based on the
+Minimal Maven scaffold for trying out web applications as web socket clients. Based on the
 Maven [Standard Directory Layout](http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 
 Includes embedded
