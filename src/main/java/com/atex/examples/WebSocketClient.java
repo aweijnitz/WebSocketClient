@@ -17,7 +17,7 @@ public class WebSocketClient {
     
     @OnOpen
     public void onOpen( final Session session ) throws IOException, EncodeException {
-        session.getBasicRemote().sendObject( "Client connect! " );
+        log.info("socket client got 'open' event");
     }
 
     @OnMessage
@@ -25,4 +25,5 @@ public class WebSocketClient {
         log.info( String.format( "Received message '%s'",
                                  message));
     }
+
 }
