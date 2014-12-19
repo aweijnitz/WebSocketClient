@@ -30,6 +30,8 @@ all incoming events.
 - The event handler is registered by the context listener on the websocket
 
 ### Connection parameters
+_Not yet fully implemented._
+
 Once a connection is established, the client will send a message to the server.
 
 The message contains the following parameters
@@ -41,7 +43,7 @@ The message contains the following parameters
 ### Replaying old events
 Currently not supported.
 
-Should be and event sent by the client requesting replay from a certain timestamp.
+Will most likely be an event sent by the client requesting replay from a certain timestamp.
 There will be a special temporary channel for this where the client is the only subscriber. 
 (Suggesting <channel>-<clientId>. Ex: _clickStream-id:12345678_)
 
