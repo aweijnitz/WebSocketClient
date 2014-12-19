@@ -13,6 +13,10 @@ Includes embedded
 ## Running
 ```mvn jetty:run```
 
+The console log should look something like this.
+
+![log example](doc/img/message_log.png)
+
 ## Application notes
 This is a plain JEE7 Web Application. At startup it creates a
 websocket connection using a ServletContextListener. It passes the
@@ -42,9 +46,9 @@ There will be a special temporary channel for this where the client is the only 
 (Suggesting <channel>-<clientId>. Ex: _clickStream-id:12345678_)
 
 ### Files
-- The start class ```src/main/java/com/atex/examples/WebSocketAPIConnector.java```
-- The event handler: ```src/main/java/com/atex/examples/WebSocketClient.java```
-- The properties file ```src/main/resources/appConf_prod.properties```
+- The start class [WebSocketAPIConnector](src/main/java/com/atex/examples/WebSocketAPIConnector.java)
+- The event handler: [WebSocketClient](src/main/java/com/atex/examples/WebSocketClient.java)
+- The properties file [appConf_prod.properties](src/main/resources/appConf_prod.properties)
 
 ## WebSockets?
 Some startng points

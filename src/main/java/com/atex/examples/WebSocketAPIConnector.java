@@ -5,10 +5,12 @@ import java.net.URI;
 import java.util.UUID;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.json.Json;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.ServletContextListener;
@@ -39,29 +41,29 @@ public class WebSocketAPIConnector implements ServletContextListener {
     public static final String ENVIRONMENT_NAME_KEY = "env";
 
     /**
-     * Connect to the API endpoint on application startup. 
-     * Looks at system property 'env' and loads the corresponding appConf_[%env].properties file from classpath.
+     * Connect to the API endpoint on application startup. Looks at system
+     * property 'env' and loads the corresponding appConf_[%env].properties file
+     * from classpath.
      *
      * @param event
      */
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        
+
         String apiEndpoint = appConf.getProperty("apiEndpoint");
         String apiKey = appConf.getProperty("apiKey");
         String msgFilter = appConf.getProperty("msgFilter"); // No filter -> ALL click events
-        
-        container = ContainerProvider.getWebSocketContainer();        
+
+        container = ContainerProvider.getWebSocketContainer();
         logger.log(Level.FINEST, "Conneting to apiEndpoint at {0}", apiEndpoint);
         try (Session session = container.connectToServer(WebSocketClient.class, URI.create(apiEndpoint))) {
-            
-            session.getBasicRemote().sendObject(makeConnectMessage(id, apiKey, msgFilter)); // Connect and authorize
+            session.getAsyncRemote().sendText(makeConnectMessage(id, apiKey, msgFilter));  // Connect and authorize
             logger.log(Level.INFO, "Connected to apiEndpoint at {0}", apiEndpoint);
             socketSession = session;
         } catch (DeploymentException e0) {
             event.getServletContext().log("WebSocketAPIConnector::contextInitialized - Connection failed to: " + apiUrl, e0);
             logger.log(Level.SEVERE, "Could not connect to apiEndpoint at {0}", apiEndpoint);
-        } catch (EncodeException | IOException e1) {
+        } catch (IOException e1) {
             event.getServletContext().log("WebSocketAPIConnector::contextInitialized - Couldn't connect to: " + apiUrl, e1);
             logger.log(Level.SEVERE, "Could not connect to apiEndpoint at {0}", apiEndpoint);
         }
@@ -82,10 +84,13 @@ public class WebSocketAPIConnector implements ServletContextListener {
     }
 
     private String makeConnectMessage(String id, String key, String filter) {
-        return "{ client: '" + id + "'"
-                + ", apiKey: '" + key + "'"
-                + ", channel: 'clickStream' "
-                + ", msgFilter: '" + filter + "'}";
+        return Json.createObjectBuilder()
+                .add("id", id)
+                .add("apiKey", key)
+                .add("channel", "clickStream")
+                .add("msgFilter", filter)
+                .build()
+                .toString();
     }
 
     @PostConstruct
