@@ -27,7 +27,7 @@ public class WebSocketAPIConnector implements ServletContextListener {
     private static final Logger logger = Logger.getLogger(WebSocketAPIConnector.class.getName());
 
     private final String id = UUID.randomUUID().toString().substring(0, 8);
-    private final WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+    private WebSocketContainer container;
     private final String apiUrl = "ws://NOT SET";
     private Properties appConf;
     public static final String DEFAULT_PROPS_FILENAME = "appConf.properties";
@@ -51,8 +51,10 @@ public class WebSocketAPIConnector implements ServletContextListener {
         String apiKey = appConf.getProperty("apiKey");
         String msgFilter = appConf.getProperty("msgFilter"); // No filter -> ALL click events
         
+        container = ContainerProvider.getWebSocketContainer();        
         logger.log(Level.FINEST, "Conneting to apiEndpoint at {0}", apiEndpoint);
         try (Session session = container.connectToServer(WebSocketClient.class, URI.create(apiEndpoint))) {
+            
             session.getBasicRemote().sendObject(makeConnectMessage(id, apiKey, msgFilter)); // Connect and authorize
             logger.log(Level.INFO, "Connected to apiEndpoint at {0}", apiEndpoint);
             socketSession = session;
