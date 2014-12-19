@@ -1,4 +1,4 @@
-# Minimal Web Socket Client WAR scaffold
+# Web Socket Client WAR scaffold
 Minimal Maven scaffold for trying out web applications as web socket clients. Based on the
 Maven [Standard Directory Layout](http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 
@@ -34,12 +34,12 @@ The message contains the following parameters
 - ```msgFilter```: key-value pair used to filter messages the client is interested in (no filter = all events)
 - ```channel```: The channel to listen to. Curently only one channel is available. 'clickStream', where all click events are propagated
 
-### Replaying old event
+### Replaying old events
 Currently not supported.
 
 Should be and event sent by the client requesting replay from a certain timestamp.
 There will be a special temporary channel for this where the client is the only subscriber. 
-(Suggesting <channel>-<clientId>. Ex: __clickStream-id:12345678__
+(Suggesting <channel>-<clientId>. Ex: _clickStream-id:12345678_)
 
 ### Files
 - The start class ```src/main/java/com/atex/examples/WebSocketAPIConnector.java```
