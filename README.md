@@ -2,11 +2,11 @@
 Minimal Maven scaffold for trying out web applications as web socket clients. Based on the
 Maven [Standard Directory Layout](http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 
-Build status: [![Build Status](https://travis-ci.org/aweijnitz/WebSocketClient.png)](https://travis-ci.org/aweijnitz/WebSocketClient)
-
 Includes embedded
 [Maven Jetty plugin](http://www.eclipse.org/jetty/documentation/9.2.2.v20140723/jetty-maven-plugin.html)
-(so, hot reload on per default).
+(hot reload on per default).
+
+Build status: [![Build Status](https://travis-ci.org/aweijnitz/WebSocketClient.png)](https://travis-ci.org/aweijnitz/WebSocketClient)
 
 ## Installation
 - Clone this repo
